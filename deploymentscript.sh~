@@ -1,0 +1,2 @@
+docker push atligud13/tictactoe
+ssh vagrant@192.168.33.10 'bash -s' < dockerbash.sh
