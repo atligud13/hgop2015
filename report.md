@@ -15,3 +15,6 @@ NodeJS er runtime environment skrifad i javascript og hannad fyrir javascript.
 
 Bower
 Bower er framenda package manager, ekki osvipadur npm.
+
+Deployment path so far:
+Kodi er skrifadur a development velinni, hun keyrir svo deployment script sem pushar nyja docker imageinu, ssh-ar sig sidan inna test velina, pullar nyjasta docker image, slekkur a thvi gamla og keyrir thad nyja upp.
