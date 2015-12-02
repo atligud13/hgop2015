@@ -30,6 +30,24 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp
         }];
       }
+    },
+    "GameWon": function (cmd) {
+      /* Always returns game won for now */
+      return [{
+        id: cmd.id,
+        event: "GameWon",
+        userName: cmd.userName,
+        timeStamp: cmd.timeStamp
+      }];
+    },
+    "GameDraw": function (cmd) {
+      /* Always returns game draw for now */
+      return [{
+        id: cmd.id,
+        event: "GameDraw",
+        userName: cmd.userName,
+        timeStamp: cmd.timeStamp
+      }];
     }
   };
 
