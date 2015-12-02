@@ -4,11 +4,12 @@ HGOP Project Template (TicTacToe)
 Getting started with this project template. After this you should have the project up-and-running on your
 development virtual machine.
 
-#### CentOs VM access problem:
+#### Project fixes & step-by-step instructions
 [Vagrant SSH Solution](./hgop-docs/vagrant-ssh-problem.md)
 
-#### Project fixes
 [NPM install errors](./hgop-docs/npm-install-errors.md)
+
+[Installing and configuring Jenkins](./hgop-docs/jenkins-ci.md)
 
 ### Thursday 26.11
 
@@ -19,12 +20,15 @@ development virtual machine.
 
 [Day 3](./hgop-docs/day3.md)
 
+[Day 4](./hgop-docs/day4.md)
+
+[Day 5](./hgop-docs/day5.md)
+
 ### Project backlog
 
 *	Can update latest version in production by push of a button
   
-* Can get feedback on failing 
- Travis CI
+* Can get feedback on failed tests in CI
  
 *	Can play tic-tac-toe against another user
  Implement using TDD
@@ -72,3 +76,6 @@ development virtual machine.
 
 *	Can play-back any given game to see how it was played
  Use event sourcing - record every user interaction
+
+* Can trace binary back to version control.
+ Store git hash for commit and package in build.
