@@ -47,7 +47,9 @@ Then  [ Placed(0,0,Empty ]
 
 ###X draws with move
 
-Given [ Placed(0,0,O), Placed(1,0,X), Placed(2,0,O),
+Given
+ 
+	[ Placed(0,0,O), Placed(1,0,X), Placed(2,0,O),
 
 	Placed(0,1,X), Placed(1,1,O), Placed(2,1,X),
 
