@@ -1,10 +1,28 @@
+var _ = require("lodash");
 module.exports = function tictactoeCommandHandler(events) {
-  var gameCreatedEvent = events[0];
-  var grid =   [["","",""],
-                 ["","",""],
-                 ["","",""]];
-  var currentMark = "X";
-  var moveCount = 0;
+  var gameState = {
+    gameCreatedEvent : events[0],
+    grid: [["","",""],
+          ["","",""],
+          ["","",""]],
+    currentMark: "X",
+    moveCount: 0
+  };
+
+  var eventHandlers={
+    "MoveMade": function(event){
+      console.log("PREVIOUS MOVE MADE, UPDATING");
+      gameState.grid[event.x][event.y] = event.mark;
+      if(event.mark === "X") gameState.currentMark = "O";
+      else gameState.currentMark = "X";
+    }
+  };
+
+  _.each(events, function(event){
+    var eventHandler = eventHandlers[event.event];
+    eventHandler && eventHandler(event);
+  });
+
   var handlers = {
     "CreateGame": function (cmd) {
       {
@@ -19,7 +37,7 @@ module.exports = function tictactoeCommandHandler(events) {
     },
     "JoinGame": function (cmd) {
       {
-        if (gameCreatedEvent === undefined) {
+        if (gameState.gameCreatedEvent === undefined) {
           return [{
             id: cmd.id,
             event: "GameDoesNotExist",
@@ -31,19 +49,35 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           event: "GameJoined",
           userName: cmd.userName,
-          otherUserName: gameCreatedEvent.userName,
+          otherUserName: gameState.gameCreatedEvent.userName,
           timeStamp: cmd.timeStamp,
           mark: "O"
         }];
       }
     },
-    "OnMove": function (cmd) {
+    "PlaceMove": function (cmd) {
+      gameState.moveCount++;
+      /* Checking if it's this player's turn */
+      if(cmd.mark !== gameState.currentMark) {
+        return [{
+          id: cmd.id,
+          event: "NotYourTurn",
+          userName: cmd.userName,
+          timeStamp: cmd.timeStamp,
+          mark: cmd.mark
+        }];
+      }
+
       /* Filling the slot */
-      grid[cmd.x, cmd.y] = cmd.mark;
+      gameState.grid[cmd.x, cmd.y] = cmd.mark;
 
       /* Setting the other player's turn */
-      if(cmd.mark === "X") currentMark = "O";
-      else currentMark = "X";
+      console.log("SETTING CURRENT MARK");
+      console.log("CURRENT MOVE: " + cmd.x + " " + cmd.y);
+      console.log("Previous: " + gameState.currentMark);
+      if(cmd.mark === "X") gameState.currentMark = "O";
+      else gameState.currentMark = "X";
+      console.log("Now: " + gameState.currentMark);
 
       /* Returning the placed event */
       return [{
