@@ -5,7 +5,7 @@ describe('create game command', function(){
 
   it('should create game',function(){
     given= [];
-    when={
+    when = {
       id:"1234",
       comm:"CreateGame",
       userName : "Gulli",

@@ -22,6 +22,12 @@ module.exports = function tictactoeCommandHandler(events) {
     eventHandler && eventHandler(event);
   });
 
+  function printGrid() {
+    console.log("[ " + gameState.grid[0][0] + ", " + gameState.grid[1][0] + ", " + gameState.grid[2][0] + " ]"); 
+    console.log("[ " + gameState.grid[0][1] + ", " + gameState.grid[1][1] + ", " + gameState.grid[2][1] + " ]"); 
+    console.log("[ " + gameState.grid[0][2] + ", " + gameState.grid[1][2] + ", " + gameState.grid[2][2] + " ]");
+  }
+
   var handlers = {
     "CreateGame": function (cmd) {
       {
@@ -69,7 +75,6 @@ module.exports = function tictactoeCommandHandler(events) {
 
       /* Checking if the spot is already filled */
       if(gameState.grid[cmd.x][cmd.y] !== "") {
-        console.log(gameState.grid[cmd.x][cmd.y]);
         return [{
           id: cmd.id,
           event: "SlotAlreadyFilled",
@@ -81,6 +86,23 @@ module.exports = function tictactoeCommandHandler(events) {
 
       /* Filling the slot */
       gameState.grid[cmd.x][cmd.y] = cmd.mark;
+
+      /* Checking if this was a winning move */
+      var col = 0, row = 0, diag = 0, rdiag = 0;
+      for(var i = 0; i < 3; ++i) {
+        if(gameState.grid[cmd.x][i] === cmd.mark) col++;
+        if(gameState.grid[i][cmd.y] === cmd.mark) row++;
+        if(gameState.grid[i][i] === cmd.mark) diag++;
+        if(gameState.grid[i][2 - i] === cmd.mark) rdiag++;
+      }
+      if(col === 3 || row === 3 || diag === 3 || rdiag === 3) 
+        return [{
+          id: cmd.id,
+          event: "Placed",
+          userName: cmd.userName,
+          timeStamp: cmd.timeStamp,
+          mark: cmd.mark
+        }, this.GameWon(cmd)[0]];
 
       /* Setting the other player's turn */
       if(cmd.mark === "X") gameState.currentMark = "O";
