@@ -1,8 +1,7 @@
-var tictactoeCommandHandler = require('./tictactoeCommandHandler');
+var tictactoeCommandHandler = require("./tictactoeCommandHandler");
 
 describe("On move command", function(){
   var given, when, then;
-  /* Comment */
   it("should place down x",function(){
     given= [{
       id:"1234",
@@ -35,7 +34,6 @@ describe("On move command", function(){
     }];
 
     var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
-
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
 });

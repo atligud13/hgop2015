@@ -1,4 +1,4 @@
-var tictactoeCommandHandler = require('./tictactoeCommandHandler');
+var tictactoeCommandHandler = require("./tictactoeCommandHandler");
 
 describe('create game command', function(){
   var given, when, then;
@@ -16,7 +16,8 @@ describe('create game command', function(){
       id:"1234",
       event:"GameCreated",
       userName: "Gulli",
-      timeStamp: "2015.12.02T11:29:44"
+      timeStamp: "2015.12.02T11:29:44",
+      mark: "X"
     }];
 
     var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -37,7 +38,8 @@ describe('create game command', function(){
       id:"12347",
       event:"GameCreated",
       userName: "Halli",
-      timeStamp: "2015.12.02T10:29:44"
+      timeStamp: "2015.12.02T10:29:44",
+      mark: "X"
     }];
 
     var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -70,7 +72,8 @@ describe('join game command', function(){
       event:"GameJoined",
       userName: "Halli",
       otherUserName: "Gulli",
-      timeStamp: "2015.12.02T11:30:50"
+      timeStamp: "2015.12.02T11:30:50",
+      mark: "O"
     }];
 
     var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
