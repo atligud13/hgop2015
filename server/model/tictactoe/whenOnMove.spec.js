@@ -20,6 +20,7 @@ describe("On move command", function(){
   });
 
   it("should place down x",function(){
+    console.log("SHOULD PLACE DOWN X");
     given = [];
     when = {
       id:"1234",
@@ -44,7 +45,6 @@ describe("On move command", function(){
   });
 
   it("should not allow X to play twice in a row", function() {
-    console.log("STARTING NOT ALLOW X TEST");
     given = [{
       id:"1234",
       event:"MoveMade",
@@ -54,7 +54,7 @@ describe("On move command", function(){
       x: 0,
       y: 0,
       mark: "X"
-  }];
+    }];
     when [{
       id:"1234",
       comm:"PlaceMove",
@@ -73,6 +73,49 @@ describe("On move command", function(){
       mark: "X"
     }];
 
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
+
+
+  it("should not allow x to fill in the same spot twice", function() {
+      given = [{
+      id:"1234",
+      event:"MoveMade",
+      userName : "Gulli",
+      name:"TheFirstGame",
+      timeStamp: "2015.12.02T11:29:44",
+      x: 0,
+      y: 0,
+      mark: "X"
+    }, {
+      id:"12345",
+      event:"MoveMade",
+      userName : "Halli",
+      name:"TheFirstGame",
+      timeStamp: "2015.12.02T11:29:44",
+      x: 1,
+      y: 2,
+      mark: "O"
+    }];
+    when [{
+      id:"1234",
+      comm:"PlaceMove",
+      userName : "Gulli",
+      name:"TheFirstGame",
+      timeStamp: "2015.12.02T11:29:44",
+      x: 0,
+      y: 0,
+      mark: "X"
+    }];
+    then = [{
+      id: "1234",
+      event: "SlotAlreadyFilled",
+      userName: "Gulli",
+      timeStamp: "2015.12.02T11:29:44",
+      mark: "X"
+    }];
+ 
     var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });

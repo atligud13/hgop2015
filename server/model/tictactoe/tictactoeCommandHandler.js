@@ -11,7 +11,6 @@ module.exports = function tictactoeCommandHandler(events) {
 
   var eventHandlers={
     "MoveMade": function(event){
-      console.log("PREVIOUS MOVE MADE, UPDATING");
       gameState.grid[event.x][event.y] = event.mark;
       if(event.mark === "X") gameState.currentMark = "O";
       else gameState.currentMark = "X";
@@ -68,16 +67,24 @@ module.exports = function tictactoeCommandHandler(events) {
         }];
       }
 
+      /* Checking if the spot is already filled */
+      if(gameState.grid[cmd.x][cmd.y] !== "") {
+        console.log(gameState.grid[cmd.x][cmd.y]);
+        return [{
+          id: cmd.id,
+          event: "SlotAlreadyFilled",
+          userName: cmd.userName,
+          timeStamp: cmd.timeStamp,
+          mark: cmd.mark
+        }];
+      }
+
       /* Filling the slot */
-      gameState.grid[cmd.x, cmd.y] = cmd.mark;
+      gameState.grid[cmd.x][cmd.y] = cmd.mark;
 
       /* Setting the other player's turn */
-      console.log("SETTING CURRENT MARK");
-      console.log("CURRENT MOVE: " + cmd.x + " " + cmd.y);
-      console.log("Previous: " + gameState.currentMark);
       if(cmd.mark === "X") gameState.currentMark = "O";
       else gameState.currentMark = "X";
-      console.log("Now: " + gameState.currentMark);
 
       /* Returning the placed event */
       return [{
