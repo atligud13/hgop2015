@@ -270,6 +270,78 @@ describe("On move command", function(){
 
 
 
+  describe("On diagonal win", function() {
+    it("should report X winning after achieving a diagonal move", function() {
+        given.push({
+        id:"1234",
+        event:"MoveMade",
+        userName : "Gulli",
+        name:"TheFirstGame",
+        timeStamp: "2015.12.02T11:29:44",
+        x: 0,
+        y: 0,
+        mark: "X"
+      });
+      given.push({
+        id:"12345",
+        event:"MoveMade",
+        userName : "Halli",
+        name:"TheFirstGame",
+        timeStamp: "2015.12.02T11:29:44",
+        x: 1,
+        y: 0,
+        mark: "O"
+      });
+      given.push({
+        id:"1234",
+        event:"MoveMade",
+        userName : "Gulli",
+        name:"TheFirstGame",
+        timeStamp: "2015.12.02T11:29:44",
+        x: 1,
+        y: 1,
+        mark: "X"
+      });
+      given.push({
+        id:"12345",
+        event:"MoveMade",
+        userName : "Halli",
+        name:"TheFirstGame",
+        timeStamp: "2015.12.02T11:29:44",
+        x: 2,
+        y: 0,
+        mark: "O"
+      });
+      when = {
+        id:"1234",
+        comm:"PlaceMove",
+        userName : "Gulli",
+        name:"TheFirstGame",
+        timeStamp: "2015.12.02T11:29:44",
+        x: 2,
+        y: 2,
+        mark: "X"
+      };
+      then = [{
+        id:"1234",
+        event:"Placed",
+        userName: "Gulli",
+        timeStamp: "2015.12.02T11:29:44",
+        mark: "X"
+      },{
+        id: "1234",
+        event: "GameWon",
+        userName: "Gulli",
+        timeStamp: "2015.12.02T11:29:44"
+      }];
+   
+      var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+      JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+    });
+  });
+
+
+
   describe("On draw", function() {
     it("should report a draw if no one wins", function() {
       given.push({

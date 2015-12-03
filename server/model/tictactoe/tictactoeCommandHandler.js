@@ -97,7 +97,6 @@ module.exports = function tictactoeCommandHandler(events) {
         if(gameState.grid[i][2 - i] === cmd.mark) rdiag++;
       }
       if(col === 3 || row === 3 || diag === 3 || rdiag === 3) {
-        printGrid();
         return [{
           id: cmd.id,
           event: "Placed",
