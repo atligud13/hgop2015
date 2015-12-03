@@ -9,11 +9,12 @@ module.exports = function tictactoeCommandHandler(events) {
     moveCount: 0
   };
 
-  var eventHandlers={
+  var eventHandlers = {
     "MoveMade": function(event){
       gameState.grid[event.x][event.y] = event.mark;
       if(event.mark === "X") gameState.currentMark = "O";
       else gameState.currentMark = "X";
+      gameState.moveCount++;
     }
   };
 
@@ -95,7 +96,8 @@ module.exports = function tictactoeCommandHandler(events) {
         if(gameState.grid[i][i] === cmd.mark) diag++;
         if(gameState.grid[i][2 - i] === cmd.mark) rdiag++;
       }
-      if(col === 3 || row === 3 || diag === 3 || rdiag === 3) 
+      if(col === 3 || row === 3 || diag === 3 || rdiag === 3) {
+        printGrid();
         return [{
           id: cmd.id,
           event: "Placed",
@@ -103,6 +105,17 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
         }, this.GameWon(cmd)[0]];
+      }
+
+      /* Checking if this was the last move, therefore resulting in a draw */
+      if(gameState.moveCount === 9) 
+        return [{
+          id: cmd.id,
+          event: "Placed",
+          userName: cmd.userName,
+          timeStamp: cmd.timeStamp,
+          mark: cmd.mark
+        }, this.GameDraw(cmd)[0]];
 
       /* Setting the other player's turn */
       if(cmd.mark === "X") gameState.currentMark = "O";
