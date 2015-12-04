@@ -23,6 +23,7 @@ describe("On move command", function(){
     it("should place down x",function(){
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -33,6 +34,7 @@ describe("On move command", function(){
       };
       then = [{
         id:"1234",
+        gameId: "1",
         event:"Placed",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
@@ -59,6 +61,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -69,6 +72,7 @@ describe("On move command", function(){
       };
       then = [{
         id: "1234",
+        gameId: "1",
         event: "NotYourTurn",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
@@ -104,6 +108,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -114,6 +119,7 @@ describe("On move command", function(){
       };
       then = [{
         id: "1234",
+        gameId: "1",
         event: "SlotAlreadyFilled",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
@@ -129,7 +135,7 @@ describe("On move command", function(){
 
   describe("On horizontal win", function() {
     it("should report X winning after achieving a horizontal move", function() {
-        given.push({
+      given.push({
         id:"1234",
         event:"MoveMade",
         userName : "Gulli",
@@ -171,6 +177,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -181,12 +188,14 @@ describe("On move command", function(){
       };
       then = [{
         id:"1234",
+        gameId: "1",
         event:"Placed",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
       },{
         id: "1234",
+        gameId: "1",
         event: "GameWon",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44"
@@ -242,6 +251,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -252,12 +262,14 @@ describe("On move command", function(){
       };
       then = [{
         id:"1234",
+        gameId: "1",
         event:"Placed",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
       },{
         id: "1234",
+        gameId: "1",
         event: "GameWon",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44"
@@ -314,6 +326,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -324,12 +337,14 @@ describe("On move command", function(){
       };
       then = [{
         id:"1234",
+        gameId: "1",
         event:"Placed",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
       },{
         id: "1234",
+        gameId: "1",
         event: "GameWon",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44"
@@ -426,6 +441,7 @@ describe("On move command", function(){
       });
       when = {
         id:"1234",
+        gameId: "1",
         comm:"PlaceMove",
         userName : "Gulli",
         name:"TheFirstGame",
@@ -436,12 +452,14 @@ describe("On move command", function(){
       };
       then = [{
         id:"1234",
+        gameId: "1",
         event:"Placed",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
       },{
         id: "1234",
+        gameId: "1",
         event: "GameDraw",
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44"

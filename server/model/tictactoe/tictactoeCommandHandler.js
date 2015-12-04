@@ -20,7 +20,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
   _.each(events, function(event){
     var eventHandler = eventHandlers[event.event];
-    eventHandler && eventHandler(event);
+    if(eventHandler) eventHandler(event);
   });
 
   function printGrid() {
@@ -34,9 +34,11 @@ module.exports = function tictactoeCommandHandler(events) {
       {
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "GameCreated",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
+          name: cmd.name,
           mark: "X"
         }];
       }
@@ -46,6 +48,7 @@ module.exports = function tictactoeCommandHandler(events) {
         if (gameState.gameCreatedEvent === undefined) {
           return [{
             id: cmd.id,
+            gameId: cmd.gameId,
             event: "GameDoesNotExist",
             userName: cmd.userName,
             timeStamp: cmd.timeStamp
@@ -53,6 +56,7 @@ module.exports = function tictactoeCommandHandler(events) {
         }
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "GameJoined",
           userName: cmd.userName,
           otherUserName: gameState.gameCreatedEvent.userName,
@@ -67,6 +71,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(cmd.mark !== gameState.currentMark) {
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "NotYourTurn",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
@@ -78,6 +83,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(gameState.grid[cmd.x][cmd.y] !== "") {
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "SlotAlreadyFilled",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
@@ -99,22 +105,24 @@ module.exports = function tictactoeCommandHandler(events) {
       if(col === 3 || row === 3 || diag === 3 || rdiag === 3) {
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "Placed",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
-        }, this.GameWon(cmd)[0]];
+        }, handlers.GameWon(cmd)[0]];
       }
 
       /* Checking if this was the last move, therefore resulting in a draw */
-      if(gameState.moveCount === 9) 
+      if(gameState.moveCount === 9)
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "Placed",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
-        }, this.GameDraw(cmd)[0]];
+        }, handlers.GameDraw(cmd)[0]];
 
       /* Setting the other player's turn */
       if(cmd.mark === "X") gameState.currentMark = "O";
@@ -123,25 +131,28 @@ module.exports = function tictactoeCommandHandler(events) {
       /* Returning the placed event */
       return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "Placed",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
         }];
     },
-    "GameWon": function (cmd) {
+    "GameWon": function(cmd) {
       /* Always returns game won for now */
       return [{
         id: cmd.id,
+        gameId: cmd.gameId,
         event: "GameWon",
         userName: cmd.userName,
         timeStamp: cmd.timeStamp
       }];
     },
-    "GameDraw": function (cmd) {
+    "GameDraw": function(cmd) {
       /* Always returns game draw for now */
       return [{
         id: cmd.id,
+        gameId: cmd.gameId,
         event: "GameDraw",
         userName: cmd.userName,
         timeStamp: cmd.timeStamp
@@ -149,8 +160,12 @@ module.exports = function tictactoeCommandHandler(events) {
     }
   };
   return {
-    executeCommand: function (cmd) {
-      return handlers[cmd.comm](cmd);
+    executeCommand: function(cmd) {
+      var handler = handlers[cmd.comm];
+      if(!handler){
+        throw new Error("No handler resolved for command " + JSON.stringify(cmd));
+      }
+      return handler(cmd);
     }
   };
 };

@@ -7,6 +7,7 @@ describe('create game command', function(){
     given= [];
     when = {
       id:"1234",
+      gameId: "1",
       comm:"CreateGame",
       userName : "Gulli",
       name:"TheFirstGame",
@@ -14,9 +15,11 @@ describe('create game command', function(){
     };
     then=[{
       id:"1234",
+      gameId: "1",
       event:"GameCreated",
       userName: "Gulli",
       timeStamp: "2015.12.02T11:29:44",
+      name: "TheFirstGame",
       mark: "X"
     }];
 
@@ -29,6 +32,7 @@ describe('create game command', function(){
     given= [];
     when={
       id:"12347",
+      gameId: "2",
       comm:"CreateGame",
       userName : "Halli",
       name:"TheFirstGame",
@@ -36,9 +40,11 @@ describe('create game command', function(){
     };
     then=[{
       id:"12347",
+      gameId: "2",
       event:"GameCreated",
       userName: "Halli",
       timeStamp: "2015.12.02T10:29:44",
+      name: "TheFirstGame",
       mark: "X"
     }];
 
@@ -56,12 +62,14 @@ describe('join game command', function(){
   it('should join game',function(){
     given= [{
       id:"1234",
+      gameId: "1",
       event:"GameCreated",
       userName: "Gulli",
       timeStamp: "2015.12.02T11:29:44"
     }];
     when={
       id:"12345",
+      gameId: "1",
       comm:"JoinGame",
       userName : "Halli",
       name:"TheFirstGame",
@@ -69,6 +77,7 @@ describe('join game command', function(){
     };
     then=[{
       id:"12345",
+      gameId: "1",
       event:"GameJoined",
       userName: "Halli",
       otherUserName: "Gulli",
@@ -85,6 +94,7 @@ describe('join game command', function(){
     given= [];
     when={
       id:"12345",
+      gameId: "1",
       comm:"JoinGame",
       userName : "Halli",
       name:"TheFirstGame",
@@ -92,6 +102,7 @@ describe('join game command', function(){
     };
     then=[{
       id:"12345",
+      gameId: "1",
       event:"GameDoesNotExist",
       userName: "Halli",
       timeStamp: "2015.12.02T11:30:55"
