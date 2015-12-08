@@ -6,13 +6,11 @@ var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
 
 describe('TEST ENV GET /api/gameHistory', function () {
-
   it('Should have ACCEPTANCE_URL environment variable exported.', function () {
     acceptanceUrl.should.be.ok;
   });
 
   it('should execute same test using old style', function (done) {
-
     var command =     {
       id : "1234",
       gameId : "999",
@@ -50,8 +48,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
           });
       });
   });
-
-
+  
    it('Should execute fluid API test', function (done) {
      /*
      given(user("YourUser").createsGame("TheFirstGame"))

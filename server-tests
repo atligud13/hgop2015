@@ -1,0 +1,64 @@
+
+[0m[0m
+[0m  GET /api/gameHistory[0m
+LOADING EVENTS
+999
+undefined
+[90mPOST /api/createGame [32m200 [90m15ms - 138b[0m
+LOADING EVENTS
+999
+[ { id: '1234',
+    gameId: '999',
+    event: 'GameCreated',
+    userName: 'Gulli',
+    timeStamp: '2014-12-02T11:29:29',
+    name: 'TheFirstGame',
+    mark: 'X' } ]
+[90mGET /api/gameHistory/999 [32m200 [90m16ms - 138b[0m
+[2K[0G  [32m  √[0m[90m should respond with JSON array with created events for game [0m[31m(125ms)[0m
+
+[0m  In memory store[0m
+LOADING EVENTS
+1234
+undefined
+[2K[0G  [32m  √[0m[90m Should return empty array for unknown id [0m
+[2K[0G  [32m  √[0m[90m Should return events previously stored [0m
+LOADING EVENTS
+1234
+[ { id: '1' } ]
+[2K[0G  [32m  √[0m[90m should append stored events to events previously stored [0m
+LOADING EVENTS
+1234
+[ { id: '1' }, { id: '2' } ]
+
+[0m  tictactoe game context[0m
+[2K[0G  [32m  √[0m[90m should route command to instantiated tictactoe game with event stream from store and return and store generated events. Test using fakes/stubs. [0m
+[2K[0G  [32m  √[0m[90m should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests. [0m
+
+[0m  create game command[0m
+[2K[0G  [32m  √[0m[90m should create game [0m
+[2K[0G  [32m  √[0m[90m should create game with another user another time [0m
+
+[0m  join game command[0m
+[2K[0G  [32m  √[0m[90m should join game [0m
+[2K[0G  [32m  √[0m[90m should reject joining of a non-existing game [0m
+
+[0m  On move command[0m
+[0m    On first move[0m
+[2K[0G    [32m  √[0m[90m should place down x [0m
+[0m    On illegal same turn move[0m
+[2K[0G    [32m  √[0m[90m should not allow X to play twice in a row [0m
+[0m    On illegal duplicate move[0m
+[2K[0G    [32m  √[0m[90m should not allow x to fill in the same spot twice [0m
+[0m    On horizontal win[0m
+[2K[0G    [32m  √[0m[90m should report X winning after achieving a horizontal move [0m
+[0m    On vertical win[0m
+[2K[0G    [32m  √[0m[90m should report X winning after achieving a vertical move [0m
+[0m    On diagonal win[0m
+[2K[0G    [32m  √[0m[90m should report X winning after achieving a diagonal move [0m
+[0m    On draw[0m
+[2K[0G    [32m  √[0m[90m should report a draw if no one wins [0m
+
+
+[92m [0m[32m 17 passing[0m[90m (187ms)[0m
+
