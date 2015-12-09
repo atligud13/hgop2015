@@ -106,7 +106,9 @@ module.exports = function tictactoeCommandHandler(events) {
         return [{
           id: cmd.id,
           gameId: cmd.gameId,
-          event: "Placed",
+          event: "MoveMade",
+          x: cmd.x,
+          y: cmd.y,
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
@@ -118,21 +120,21 @@ module.exports = function tictactoeCommandHandler(events) {
         return [{
           id: cmd.id,
           gameId: cmd.gameId,
-          event: "Placed",
+          event: "MoveMade",
+          x: cmd.x,
+          y: cmd.y,
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark
         }, handlers.GameDraw(cmd)[0]];
 
-      /* Setting the other player's turn */
-      if(cmd.mark === "X") gameState.currentMark = "O";
-      else gameState.currentMark = "X";
-
-      /* Returning the placed event */
+      /* Returning the MoveMade event */
       return [{
           id: cmd.id,
           gameId: cmd.gameId,
-          event: "Placed",
+          event: "MoveMade",
+          x: cmd.x,
+          y: cmd.y,
           userName: cmd.userName,
           timeStamp: cmd.timeStamp,
           mark: cmd.mark

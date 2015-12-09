@@ -35,7 +35,9 @@ describe("On move command", function(){
       then = [{
         id:"1234",
         gameId: "1",
-        event:"Placed",
+        event:"MoveMade",
+        x: 0,
+        y: 0,
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
@@ -189,7 +191,9 @@ describe("On move command", function(){
       then = [{
         id:"1234",
         gameId: "1",
-        event:"Placed",
+        event:"MoveMade",
+        x: 2,
+        y: 0,
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
@@ -263,7 +267,9 @@ describe("On move command", function(){
       then = [{
         id:"1234",
         gameId: "1",
-        event:"Placed",
+        event:"MoveMade",
+        x: 0,
+        y: 2,
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
@@ -338,7 +344,9 @@ describe("On move command", function(){
       then = [{
         id:"1234",
         gameId: "1",
-        event:"Placed",
+        event:"MoveMade",
+        x: 2,
+        y: 2,
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
@@ -453,7 +461,9 @@ describe("On move command", function(){
       then = [{
         id:"1234",
         gameId: "1",
-        event:"Placed",
+        event:"MoveMade",
+        x: 2,
+        y: 2,
         userName: "Gulli",
         timeStamp: "2015.12.02T11:29:44",
         mark: "X"
