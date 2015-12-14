@@ -6,4 +6,3 @@ docker  kill tictactoe:$1
 docker rm tictactoe:$1
 echo running updated version
 docker run -p 8080:$1 -d --name tictactoe:$1-e "NODE_ENV=production" atligud13/tictactoe:$2
-docker run -p 8080:$1 -d  -e "NODE_ENV=production" gulli/tictactoe:$2
