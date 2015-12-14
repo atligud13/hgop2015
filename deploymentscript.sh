@@ -2,4 +2,4 @@ echo Pushing docker image
 docker push atligud13/tictactoe
 
 echo Updating docker container
-ssh vagrant@192.168.33.10 'bash -s' < testmachinebash.sh
+ssh vagrant@192.168.33.10 'bash -s' < testmachinebash.sh $1
