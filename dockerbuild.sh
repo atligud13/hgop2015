@@ -9,14 +9,15 @@ if [ -z "$GIT_COMMIT" ]; then
   export GIT_URL=$(git config --get remote.origin.url)
 fi
 
-echo Remove .git from url in order to get https link to repo (assumes https url for GitHub)
+# Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
 echo Building app
 export MOCHA_REPORTER=xunit
 export MOCHA_REPORT=server-tests.xml
+echo got past mocha report exports
 grunt
-
+echo Got past grunt file
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Grunt build failed with exit code " $rc
