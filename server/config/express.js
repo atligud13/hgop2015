@@ -31,10 +31,7 @@ module.exports = function(app) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', config.root + '/public');
-  }
-
-  if('test' !== env) {
-    app.use('morgan');
+    app.use(morgan('dev'));
   }
 
   if ('development' === env || 'test' === env) {
@@ -42,6 +39,7 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, 'client')));
     app.set('appPath', 'client');
+    app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }
 };
