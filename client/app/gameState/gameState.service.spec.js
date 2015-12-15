@@ -49,7 +49,6 @@ describe('Factory: TictacToeState', function () {
          x:0, 
          y:1,
          mark: 'X'
-        }
       }]
     );
 
