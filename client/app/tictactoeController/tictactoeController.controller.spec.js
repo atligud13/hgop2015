@@ -55,15 +55,12 @@ describe('Controller: TictactoeControllerCtrl', function () {
       event: 'GameCreated',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Creator'
-      }
+      userName: 'Creator'
     }, {
       event: 'GameJoined',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Joiner'
+      userName: 'Joiner'
       }
     }]);
     httpBackend.flush();
@@ -74,24 +71,19 @@ describe('Controller: TictactoeControllerCtrl', function () {
     httpBackend.expectPOST('/api/placeMove/', {
       gameId: '87687',
       comm: 'PlaceMove',
-      user: {
-        userName: 'Gummi'
-      },
+      userName: 'Gummi',
       timeStamp: '2014-12-02T11:29:29',
-      move: {
-        xy:{x:2, y:0},
-        side: 'X'
-      }
+       x:2, 
+       y:0,
+       mark: 'X'
     }).respond([
       {
         event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:0},
-          side: 'X'
+        x:2, 
+        y:0,
+        mark: 'X'
         }
       }
     ]);
@@ -117,25 +109,19 @@ describe('Controller: TictactoeControllerCtrl', function () {
     httpBackend.expectPOST('/api/placeMove/', {
       gameId: '87687',
       comm: 'PlaceMove',
-      user: {
-        userName: 'Gummi'
-      },
+      userName: 'Gummi',
       timeStamp: '2014-12-02T11:29:29',
-      move: {
-        xy:{x:2, y:1},
-        side: 'O'
-      }
+      x:2, 
+      y:1,
+      mark: 'O'
     }).respond([
       {
         event: 'MovePlaced',
-        user: {
-          userName: 'Gummi'
-        },
+        userName: 'Gummi',
         timeStamp: '2014-12-02T11:29:29',
-        move: {
-          xy:{x:2, y:1},
-          side: 'O'
-        }
+        x:2, 
+        y:1,
+        mark: 'O'
       }
     ]);
 
@@ -161,16 +147,12 @@ describe('Controller: TictactoeControllerCtrl', function () {
       event: 'GameCreated',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Creator'
-      }
+      userName: 'Creator'
     }, {
       event: 'GameJoined',
       name: 'Game Number one',
       gameId: '123',
-      user: {
-        userName: 'Joiner'
-      }
+      userName: 'Joiner'
     }]);
 
     interval.flush(2001);
