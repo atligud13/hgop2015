@@ -53,8 +53,72 @@ GET /api/gameHistory/54
 
 GET /api/gameHistory/59
 
-Þetta bendir á að testin eru ekki keyrandi hvert á eftir öðru heldur eru þau höndluð eftir hentugleika.
+Þetta bendir til að testin eru ekki keyrandi hvert á eftir öðru heldur eru þau höndluð eftir hentugleika.
 
 ##Why enforce the capability to track versions?
 
 Útgáfustýring gerir okkur kleift að bregðast við ýmsum vandamálum. Ef upp kemur böggur í nýjustu útfærslu ætti að vera lítið mál að keyra einfaldlega upp seinustu virkandi útgáfu af kerfinu þangað til böggurinn hefur verið lagaður. Hún auðveldar okkur líka að finna gamla legacy bögga og átta okkur á því hvar, hvenær og hvernig villur komu upp í kerfinu með því að geta skoðað gamlar útgáfur og bera þær saman. Þannig er hægt að negla það niður á nokkuð þægilegan hátt hvenær breytingarnar voru gerðar sem orsökuðu hvern þann galla sem kemur upp í kerfinu. 
+
+
+##Shell scripts
+
+### Commit stage
+
+export DISPLAY=:0
+
+npm install
+
+bower install
+
+./dockerbuild.sh
+
+
+###Acceptance stage
+
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+
+env
+
+./deploymentscript.sh 8080 $GIT_UPSTREAM_HASH
+
+npm install
+
+export MOCHA_REPORTER=xunit
+
+export MOCHA_REPORT=server-tests.xml
+
+export ACCEPTANCE_URL=192.168.33.10:8080
+
+grunt mochaTest:acceptance
+
+
+###Load / Capacity testing stage
+
+npm install
+
+export MOCHA_REPORTER=xunit
+
+export MOCHA_REPORT=server-tests.xml
+
+export ACCEPTANCE_URL=192.168.33.10:8080
+
+grunt mochaTest:load
+
+
+###Production stage
+
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+
+env
+
+./deploymentscript.sh 8081 $GIT_UPSTREAM_HASH
+
+
+##Final words
+
+Ég naut tímans og verkefnanna virkilega mikið. Hver einasti dagur var bölvað vesen en þannig átti
+það líka að vera, maður lærði heilan helling af því og það er það sem situr eftir. 
+
+Nánast hver einasti dagur var barátta við tíma og kenni ég aðallega tölvunni minni um það, lenti í miklu 
+basli með að keyra upp allt sem þurfti og allt tók langan tíma. Vegna þessa gæti verið að ég hafi tossað 
+einhverja litla hluti, git commits hefðu t.d. mátt vera skipulagðari og meira lýsandi hjá mér sem dæmi. Ég reyndi þó að skilja við verkefnið í ágætis standi og náði að koma upp virkandi útgáfu af leiknum á production.
