@@ -16,10 +16,10 @@ angular.module('tictactoeApp')
               gameState.created = true;
               gameState.name = event.name;
               gameState.gameId = event.gameId;
-              gameState.creatingUser = event.username;
+              gameState.creatingUser = event.userName;
             },
             'GameJoined': function (event, gameState) {
-              gameState.joiningUser = event.username;
+              gameState.joiningUser = event.userName;
             },
             'MoveMade': function (event, gameState) {
               var x = event.x, y = event.y;
@@ -28,7 +28,7 @@ angular.module('tictactoeApp')
             },
             'GameWon': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
-              gameState.winner = event.username;
+              gameState.winner = event.userName;
             },
             'GameDraw': function (event, gameState) {
               gameState.nextTurn = 'GameOver';

@@ -52,7 +52,7 @@ angular.module('tictactoeApp')
       thenHandleEvents($http.post('/api/placeMove/', {
           gameId: $scope.gameState.gameId,
           comm: 'PlaceMove',
-          user: $scope.me,
+          username: $scope.me,
           timeStamp: '2014-12-02T11:29:29',
           x: coords[0],
           y: coords[1],

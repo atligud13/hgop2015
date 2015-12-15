@@ -42,13 +42,13 @@ describe('Factory: TictacToeState', function () {
   it('Should add moves 0,1 to game board', function () {
 
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'MoveMade',
         userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
-         x:0, 
-         y:1,
-         mark: 'X'
+        x:0, 
+        y:1,
+        mark: 'X'
       }]
     );
 
@@ -59,7 +59,7 @@ describe('Factory: TictacToeState', function () {
   it('Should add move 2,2 to board.', function () {
 
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'MoveMade',
         userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
@@ -76,7 +76,7 @@ describe('Factory: TictacToeState', function () {
   it('Should mark nextTurn as opposite from last event.', function () {
     gameState.me = {side: 'O'};
     gameState.mutate([{
-        event: 'MovePlaced',
+        event: 'MoveMade',
         userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29',
