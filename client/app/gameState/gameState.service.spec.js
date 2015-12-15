@@ -93,7 +93,7 @@ describe('Factory: TictacToeState', function () {
     gameState.me = {side: 'X'};
     gameState.mutate([{
         event: 'GameCreated',
-        userName: 'Gummi'
+        userName: 'Gummi',
         name: 'TheFirstGame',
         timeStamp: '2014-12-02T11:29:29'
       }]
