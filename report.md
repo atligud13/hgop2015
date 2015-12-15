@@ -33,11 +33,13 @@ Bower er framenda package manager, ekki osvipadur npm.
 Kodi er skrifadur a development velinni, hun keyrir svo deployment script sem pushar nyja docker imageinu, ssh-ar sig sidan inna test velina, pullar nyjasta docker image, slekkur a thvi gamla og keyrir thad nyja upp.
 
 ##Load test run results:
+
 Sem stendur þá eru load testin sett á að spila 100 leiki á innan við 10 sekúndum. Í seinasta
 testi þá tók þetta um 5 sekúndur á local vél en þegar kallað var á test vélina tók það aðeins lengri tíma.
 Hver leikur er hinsvegar spilaðar að jafntefli svo að mikið er af place move köllum í testunum. Það ætti að útskýra að hluta til allavega af hverju þetta er að taka svona langan tíma.
 
 ##Serial or parallel:
+
 Node js er single threaded sem þýðir að það er alltaf einn og sama processinn í gangi sem sér um að höndla 
 allar skipanir. Hinsvegar er hann asynchronous sem gerir honum kleyft að leggja eitt verkefni til hliðar ef 
 það er að bíða eftir svari og halda áfram með það næsta. Load testin eru því keyrandi samhliða hvort öðru, það
@@ -52,3 +54,7 @@ GET /api/gameHistory/54
 GET /api/gameHistory/59
 
 Þetta bendir á að testin eru ekki keyrandi hvert á eftir öðru heldur eru þau höndluð eftir hentugleika.
+
+##Why enforce the capability to track versions?
+
+Útgáfustýring gerir okkur kleift að bregðast við ýmsum vandamálum. Ef upp kemur böggur í nýjustu útfærslu ætti að vera lítið mál að keyra einfaldlega upp seinustu virkandi útgáfu af kerfinu þangað til böggurinn hefur verið lagaður. Hún auðveldar okkur líka að finna gamla legacy bögga og átta okkur á því hvar, hvenær og hvernig villur komu upp í kerfinu með því að geta skoðað gamlar útgáfur og bera þær saman. Þannig er hægt að negla það niður á nokkuð þægilegan hátt hvenær breytingarnar voru gerðar sem orsökuðu hvern þann galla sem kemur upp í kerfinu. 
