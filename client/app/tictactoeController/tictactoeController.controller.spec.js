@@ -61,7 +61,6 @@ describe('Controller: TictactoeControllerCtrl', function () {
       name: 'Game Number one',
       gameId: '123',
       userName: 'Joiner'
-      }
     }]);
     httpBackend.flush();
   }
@@ -84,7 +83,6 @@ describe('Controller: TictactoeControllerCtrl', function () {
         x:2, 
         y:0,
         mark: 'X'
-        }
       }
     ]);
 
@@ -122,7 +120,6 @@ describe('Controller: TictactoeControllerCtrl', function () {
         x:2, 
         y:1,
         mark: 'O'
-      }
     ]);
 
 
