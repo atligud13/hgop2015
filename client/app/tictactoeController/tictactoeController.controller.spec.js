@@ -120,6 +120,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
         x:2, 
         y:1,
         mark: 'O'
+      }
     ]);
 
 
