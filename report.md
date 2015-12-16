@@ -59,6 +59,14 @@ GET /api/gameHistory/59
 
 Útgáfustýring gerir okkur kleift að bregðast við ýmsum vandamálum. Ef upp kemur böggur í nýjustu útfærslu ætti að vera lítið mál að keyra einfaldlega upp seinustu virkandi útgáfu af kerfinu þangað til böggurinn hefur verið lagaður. Hún auðveldar okkur líka að finna gamla legacy bögga og átta okkur á því hvar, hvenær og hvernig villur komu upp í kerfinu með því að geta skoðað gamlar útgáfur og bera þær saman. Þannig er hægt að negla það niður á nokkuð þægilegan hátt hvenær breytingarnar voru gerðar sem orsökuðu hvern þann galla sem kemur upp í kerfinu. 
 
+##What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+
+Skyldar aðgerðir eiga að tilheyra sama build stage og því meikar það bara sens að láta sama stig og buildar docker fælinn um að pusha honum líka. Acceptance stage á ekki að snerta við source kóða heldur á það bara að taka við binary sem input.
+
+##How does the "deploy any version, anywhere" build feature work?
+
+Hann gerir okkur kleyft að vita nákvæmlega hvaða útgáfu og stigi í Version Control kerfinu okkar við erum að keyra upp, því ætti að vera lítið mál að snúa aftur til fyrri breytinga ef eitthvað kemur upp.
+
 
 ##Shell scripts
 
